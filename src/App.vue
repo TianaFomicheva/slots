@@ -1,44 +1,49 @@
 <template>
 <div>
-  <!--
-  <List :items="users" :fields="['username', 'name']">
-    <template #item="{ item: user }">
-      {{ hello }} {{ user.name }} ({{ user.username }})
-    </template>
-  </List>
-  <hr />
-  <List :items="todos" :fields="['title']">
-    <template #item="slotProps">
-      <Todo :item="slotProps.item" />
-    </template>
-  </List>
-  -->
 
-<Userlist :items="users" :fields="['username','name']"/>
+
+<!-- <List :items="users" :fields="['username','name']" :itemComponent="$options.listItemComponent.User" > -->
+<List :items="users" :fields="['username','name']"  >
+  <template #item="{ item:user }">
+    {{ user.name }} 
+
+  </template>
+
+</List>
+
+<!-- <List :items="todos" :fields="['title']" :itemComponent="$options.listItemComponent.Todo" /> -->
+
+
+<!-- <List :items="todos" :fields="['title']" :itemComponent="$options.listItemComponent.Todo" > -->
+<List :items="todos" :fields="['title']" >
+  <template #item="slotProps">
+    <Todo :item="slotProps.item" />
+  </template>
+</List>
  
   </div>
 </template>
 
 <script>
-import Userlist from "./components/Userlist.vue";
-// import List from "./components/List.vue";
+import List from "./components/List.vue";
 // import User from "./components/User.vue";
-// import Todo from "./components/Todo.vue";
+import Todo from "./components/Todo.vue";
 
 import { loadUsers, loadTodos } from "./api.js";
 export default {
   name: "App",
   components: {
-    Userlist,
-    // List,
-    // Todo,
-    // User
+    List, Todo
   },
   data() {
     return { filter:"",
-    users: []
-    };
+    users: [], todos:[],
+  }
   },
+  // listItemComponent:{
+  //   User
+  //   // , Todo
+  // },
 
 
   mounted() {
